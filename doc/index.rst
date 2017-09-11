@@ -13,7 +13,7 @@ slot easily into my comm workspace alongside weechat and neomutt.
 To-Do
 -----
 
-- [ ] Usage documentation (shortcuts, etc)
+- [X] Usage documentation (shortcuts, etc)
 - [X] Curses inteface design
 - [ ] Curses interface prototype
 - [ ] Simple reminder CRUD
@@ -24,11 +24,11 @@ To-Do
    :maxdepth: 2
    :caption: Contents:
 
+.. _usage:
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Usage
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   usage/create-edit-delete-notes
+   usage/keybindings
