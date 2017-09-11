@@ -4,8 +4,7 @@ Keybindings
 Navigation
 ----------
 
-- ``j`` :: move down the list
-- ``k`` :: move up the list
+- ``hjkl`` :: move left/down/up/right in the notes list
 - ``ctrl+j`` :: move down the categories list
 - ``ctrl+k`` :: move up the categories list
 - ``shift+j`` :: decrement a note's priority
