@@ -4,9 +4,9 @@ import yaml
 from shutil import copy
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='recall')
-    parser.add_argument('-c', '--config', default='~/.recall/config.yml',
-                        help='The recall config file')
+    parser = argparse.ArgumentParser(description='aerende')
+    parser.add_argument('-c', '--config', default='~/.aerende/config.yml',
+                        help='The aerende config file')
     return parser.parse_args()
 
 

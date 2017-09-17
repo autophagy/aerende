@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# recall documentation build configuration file, created by
+# aerende documentation build configuration file, created by
 # sphinx-quickstart on Mon Sep 11 10:08:03 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'recall'
+project = u'aerende'
 copyright = u'2017, Mika (Autophagy)'
 author = u'Mika (Autophagy)'
 
@@ -114,7 +114,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'recalldoc'
+htmlhelp_basename = 'aerendedoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'recall.tex', u'recall Documentation',
+    (master_doc, 'aerende.tex', u'aerende Documentation',
      u'Mika (Autophagy)', 'manual'),
 ]
 
@@ -151,7 +151,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'recall', u'recall Documentation',
+    (master_doc, 'aerende', u'aerende Documentation',
      [author], 1)
 ]
 
@@ -162,7 +162,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'recall', u'recall Documentation',
-     author, 'recall', 'One line description of project.',
+    (master_doc, 'aerende', u'aerende Documentation',
+     author, 'aerende', 'One line description of project.',
      'Miscellaneous'),
 ]
