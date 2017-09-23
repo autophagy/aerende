@@ -1,4 +1,5 @@
 import urwid
+from . import version
 
 
 class NoteWidget(urwid.LineBox):
@@ -21,3 +22,25 @@ class NoteWidget(urwid.LineBox):
     def _create_footer(self, note):
         footer_template = "[ {0} ]"
         return footer_template.format(" // ".join(note.tags))
+
+
+class NotesFrame(urwid.Frame):
+    """"Frame for displaying notes and status"""
+
+    def __init__(self, notes):
+        self.notes = notes
+
+        note_widgets = []
+        for note in notes:
+            note_widgets.append(NoteWidget(note))
+
+        self.notes_listbox = urwid.ListBox(urwid.SimpleListWalker(note_widgets))
+        self.status = self._create_statusbar(notes)
+
+        urwid.Frame.__init__(self, self.notes_listbox, footer=self.status)
+
+
+    def _create_statusbar(self, notes):
+        aerende_text = urwid.Text("aerende :: {0}".format(version))
+        notes_text = urwid.Text(" [ {0} ]".format(len(notes)), align='right')
+        return urwid.Columns([aerende_text, notes_text])
