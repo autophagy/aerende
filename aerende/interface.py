@@ -7,14 +7,11 @@ class NoteWidget(urwid.LineBox):
     def __init__(self, note):
         self.note = note
 
-        header = urwid.Text(self._create_header(note))
-        footer = urwid.Text(self._create_footer(note))
-        body = urwid.Filler(urwid.Text(note.text), 'top', top=1)
-
-        frame = urwid.Padding(urwid.Frame(body, header=header, footer=footer),
-                              left=1, right=1)
-
-        urwid.LineBox.__init__(self, frame)
+        header = self._create_header(note)
+        footer = self._create_footer(note)
+        note_display = urwid.Text("{0}\n\n{1}\n\n{2}".format(
+                                  header, note.text, footer))
+        urwid.LineBox.__init__(self, note_display)
 
 
     def _create_header(self, note):
@@ -22,4 +19,5 @@ class NoteWidget(urwid.LineBox):
 
 
     def _create_footer(self, note):
-        return str(note.tags)
+        footer_template = "[ {0} ]"
+        return footer_template.format(" // ".join(note.tags))
