@@ -1,5 +1,5 @@
 import urwid
-from . import version
+from . import version, title
 
 
 class NoteWidget(urwid.LineBox):
@@ -41,6 +41,6 @@ class NotesFrame(urwid.Frame):
 
 
     def _create_statusbar(self, notes):
-        aerende_text = urwid.Text("aerende :: {0}".format(version))
+        aerende_text = urwid.Text("{0} :: {1}".format(title, version))
         notes_text = urwid.Text(" [ {0} ]".format(len(notes)), align='right')
         return urwid.Columns([aerende_text, notes_text])
