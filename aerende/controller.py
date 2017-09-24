@@ -28,12 +28,13 @@ class Controller(object):
                 if note_yaml is None:
                     return notes
 
-                for unique_id, note in note_yaml[0].items():
-                    notes.append(Note(note['title'],
-                                      note['tags'],
-                                      note['text'],
-                                      note['priority'],
-                                      unique_id))
+                for note_yaml_item in note_yaml:
+                    for unique_id, note in note_yaml_item.items():
+                        notes.append(Note(note['title'],
+                                          note['tags'],
+                                          note['text'],
+                                          note['priority'],
+                                          unique_id))
                 return notes
         else:
             open(self.data_path, 'x')
