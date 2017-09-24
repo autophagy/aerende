@@ -55,9 +55,10 @@ class Controller(object):
         del self.notes[unique_id]
 
     def load_tags(self, notes):
-        tags = {}
+        tags = {'ALL': 0}
         tag_widgets = []
         for note in notes:
+            tags['ALL'] += 1
             for tag in note.tags:
                 if tag in tags:
                     tags[tag] += 1
