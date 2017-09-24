@@ -9,7 +9,7 @@ from .interface import AerendeInterface
 
 def parse_args():
     parser = argparse.ArgumentParser(description='aerende')
-    parser.add_argument('-c', '--config', default='~/.aerende/config.yml',
+    parser.add_argument('-c', '--config', default='~/.andgeloman/aerende/config.yml',
                         help='The aerende config file')
     return parser.parse_args()
 
