@@ -13,7 +13,6 @@ class AerendeInterface(urwid.Columns):
         self.tags_list = TagsListBox([])
         urwid.Columns.__init__(self, [(18, self.tags_list), self.notes_frame])
 
-
     # [ Notes ]
 
     def draw_notes(self, notes):
@@ -37,10 +36,8 @@ class NoteWidget(urwid.LineBox):
                                   header, note.text, footer))
         urwid.LineBox.__init__(self, note_display)
 
-
     def _create_header(self, note):
         return "{0} :: {1}".format(note.priority, note.title)
-
 
     def _create_footer(self, note):
         footer_template = "[ {0} ]"
@@ -52,10 +49,9 @@ class NotesFrame(urwid.Frame):
 
     def __init__(self, notes):
         note_widgets = self._create_note_widgets(notes)
-        self.notes_listbox = urwid.ListBox(urwid.SimpleListWalker(note_widgets))
+        self.notes = urwid.ListBox(urwid.SimpleListWalker(note_widgets))
         self.status = self._create_statusbar(notes)
-        urwid.Frame.__init__(self, self.notes_listbox, footer=self.status)
-
+        urwid.Frame.__init__(self, self.notes, footer=self.status)
 
     def _create_note_widgets(self, notes):
         note_widgets = []
@@ -63,13 +59,12 @@ class NotesFrame(urwid.Frame):
             note_widgets.append(NoteWidget(note))
         return note_widgets
 
-
     def _create_statusbar(self, notes):
         aerende_text = urwid.Text("{0} :: {1}".format(title, version))
         notes_text = urwid.Text(" [ {0} ]".format(len(notes)), align='right')
         columns = urwid.Columns([aerende_text, notes_text])
-        return urwid.AttrMap(urwid.Padding(columns, left=1, right=1), 'highlight')
-
+        return urwid.AttrMap(urwid.Padding(columns, left=1, right=1),
+                             'highlight')
 
     def draw_notes(self, notes):
         note_widgets = self._create_note_widgets(notes)
@@ -78,6 +73,7 @@ class NotesFrame(urwid.Frame):
         self.footer = self._create_statusbar(notes)
         self.set_footer(self.footer)
 
+
 class TagsListBox(urwid.ListBox):
     """ListBox widget for displaying a list of tags"""
 
@@ -85,13 +81,11 @@ class TagsListBox(urwid.ListBox):
         tag_widgets = self._create_tag_widgets(tags)
         urwid.ListBox.__init__(self, urwid.SimpleListWalker(tag_widgets))
 
-
     def _create_tag_widgets(self, tags):
         tag_widgets = []
         for tag in tags:
             tag_widgets.append(urwid.Text(str(tag)))
         return tag_widgets
-
 
     def draw_tags(self, tags):
         tag_widgets = self._create_tag_widgets(tags)

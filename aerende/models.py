@@ -1,10 +1,12 @@
 import uuid
 
+
 class Note(object):
     """
     A note.
     Currently has a title, tags, texr and a priority."""
-    def __init__(self, title, tags, text, priority = 1, unique_id = None):
+
+    def __init__(self, title, tags, text, priority=1, unique_id=None):
         if unique_id is None:
             self.id = str(uuid.uuid4())
         else:
