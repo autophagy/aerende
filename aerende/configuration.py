@@ -1,0 +1,3 @@
+PALETTE = [
+    ['highlight', 'black', 'white']
+]

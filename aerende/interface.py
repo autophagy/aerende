@@ -43,4 +43,5 @@ class NotesFrame(urwid.Frame):
     def _create_statusbar(self, notes):
         aerende_text = urwid.Text("{0} :: {1}".format(title, version))
         notes_text = urwid.Text(" [ {0} ]".format(len(notes)), align='right')
-        return urwid.Columns([aerende_text, notes_text])
+        columns = urwid.Columns([aerende_text, notes_text])
+        return urwid.AttrMap(urwid.Padding(columns, left=1, right=1), 'highlight')
