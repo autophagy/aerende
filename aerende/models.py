@@ -26,3 +26,13 @@ class Note(object):
                 'priority': self.priority,
             }
         }
+
+
+class Tag(object):
+    """A note tag, for categorisation/filtering"""
+    def __init__(self, type, frequency):
+        self.type = type
+        self.frequency = frequency
+
+    def __str__(self):
+        return "[{0}] {1}".format(self.frequency, self.type)

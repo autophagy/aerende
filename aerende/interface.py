@@ -45,3 +45,16 @@ class NotesFrame(urwid.Frame):
         notes_text = urwid.Text(" [ {0} ]".format(len(notes)), align='right')
         columns = urwid.Columns([aerende_text, notes_text])
         return urwid.AttrMap(urwid.Padding(columns, left=1, right=1), 'highlight')
+
+
+class TagsListBox(urwid.ListBox):
+    """ListBox widget for displaying a list of tags"""
+
+    def __init__(self, tags):
+        self.tags = tags
+
+        tag_widgets = []
+        for tag in tags:
+            tag_widgets.append(urwid.Text(str(tag)))
+
+        urwid.ListBox.__init__(self, urwid.SimpleListWalker(tag_widgets))
