@@ -2,7 +2,7 @@ from pathlib import Path
 import yaml
 from os import path
 import uuid
-import urwid
+from urwid import MainLoop
 
 from .configuration import PALETTE
 from .models import Note
@@ -15,7 +15,7 @@ class Controller(object):
         self.data_path = path.expanduser(self.config['data_path'])
         self.notes = self.load_notes()
 
-        loop = urwid.MainLoop(interface, PALETTE)
+        loop = MainLoop(interface, PALETTE)
         interface.draw_notes(self.notes)
         loop.run()
 
