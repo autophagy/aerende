@@ -3,6 +3,10 @@ import argparse
 import yaml
 from shutil import copy
 
+from .controller import Controller
+from .interface import AerendeInterface
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description='aerende')
     parser.add_argument('-c', '--config', default='~/.aerende/config.yml',
@@ -23,7 +27,9 @@ def get_config(file):
 def main():
     args = parse_args()
     config = get_config(args.config)
+    interface = AerendeInterface()
 
+    Controller(config=config, interface=interface)
 
 if __name__ == '__main__':
     main()
