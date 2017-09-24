@@ -5,7 +5,7 @@ import uuid
 from urwid import MainLoop
 
 from .configuration import PALETTE
-from .models import Note
+from .models import Note, Tag
 
 
 class Controller(object):
@@ -14,9 +14,11 @@ class Controller(object):
         self.config = config
         self.data_path = path.expanduser(self.config['data_path'])
         self.notes = self.load_notes()
+        self.tags = self.load_tags(self.notes)
 
         loop = MainLoop(interface, PALETTE)
         interface.draw_notes(self.notes)
+        interface.draw_tags(self.tags)
         loop.run()
 
     def load_notes(self):
@@ -51,6 +53,19 @@ class Controller(object):
 
     def delete_note(self, unique_id):
         del self.notes[unique_id]
+
+    def load_tags(self, notes):
+        tags = {}
+        tag_widgets = []
+        for note in notes:
+            for tag in note.tags:
+                if tag in tags:
+                    tags[tag] += 1
+                else:
+                    tags[tag] = 1
+        for tag in tags:
+            tag_widgets.append(Tag(tag, tags[tag]))
+        return tag_widgets
 
     def exit(self):
         exit()
