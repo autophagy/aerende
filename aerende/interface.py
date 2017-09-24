@@ -29,7 +29,11 @@ class AerendeInterface(Columns):
     # [ Tags ]
 
     def draw_tags(self, tags):
-        self.contents[0][0].draw_tags(tags)
+        tag_list = self.contents[0][0]
+        tag_list.draw_tags(tags)
+        new_options = self.options('given', tag_list.get_max_width(tags),
+                                   False)
+        self.contents[0] = (tag_list, new_options)
 
 
 class NoteWidget(LineBox):
@@ -97,3 +101,18 @@ class TagsListBox(ListBox):
     def draw_tags(self, tags):
         tag_widgets = self._create_tag_widgets(tags)
         self.body = SimpleListWalker(tag_widgets)
+
+    def get_max_width(self, tags):
+        max_width = 30
+        min_width = 18
+        width = 0
+        for tag in tags:
+            l = len(str(tag)) + 2
+            if l > width:
+                width = l
+
+        if width > max_width:
+            return max_width
+        elif width < min_width:
+            return min_width
+        return max_width
