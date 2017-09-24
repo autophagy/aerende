@@ -6,6 +6,7 @@ from urwid import (Columns,
                    AttrMap,
                    Padding,
                    SimpleListWalker)
+from functools import reduce
 
 from . import version, title
 
@@ -105,14 +106,7 @@ class TagsListBox(ListBox):
     def get_max_width(self, tags):
         max_width = 30
         min_width = 18
-        width = 0
-        for tag in tags:
-            l = len(str(tag)) + 2
-            if l > width:
-                width = l
-
-        if width > max_width:
-            return max_width
-        elif width < min_width:
-            return min_width
-        return max_width
+        width = len(str(reduce((lambda x, y:
+                                x if len(str(x)) > len(str(y)) else y),
+                        tags))) + 2
+        return max(min(max_width, width), min_width)
