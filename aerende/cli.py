@@ -25,11 +25,14 @@ def get_config(file):
 
 
 def main():
-    args = parse_args()
-    config = get_config(args.config)
-    interface = AerendeInterface()
+    try:
+        args = parse_args()
+        config = get_config(args.config)
+        interface = AerendeInterface()
 
-    Controller(config=config, interface=interface)
+        Controller(config=config, interface=interface)
+    except KeyboardInterrupt:
+        exit(0)
 
 if __name__ == '__main__':
     main()
