@@ -12,12 +12,15 @@ class Note(object):
         else:
             self.id = unique_id
         self.title = title
-        self.tags = tags
+        self.tags = self.__verify_tags(tags)
         self.text = text
         self.priority = priority
 
     def __str__(self):
         return str(self.to_dictionary)
+
+    def __verify_tags(self, tags):
+        return list(set(tags))
 
     def to_dictionary(self):
         return {
