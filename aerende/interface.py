@@ -2,6 +2,29 @@ import urwid
 from . import version, title
 
 
+class AerendeInterface(urwid.Columns):
+    """
+    Creates the interface for Aerende, as well as providing refresh and drawing
+    functions.
+    """
+
+    def __init__(self):
+        self.notes_frame = NotesFrame([])
+        self.tags_list = TagsListBox([])
+        urwid.Columns.__init__(self, [(18, self.tags_list), self.notes_frame])
+
+
+    # [ Notes ]
+
+    def draw_notes(self, notes):
+        self.contents[1][0].draw_notes(notes)
+
+    # [ Tags ]
+
+    def draw_tags(self, tags):
+        self.contents[0][0].draw_tags(tags)
+
+
 class NoteWidget(urwid.LineBox):
     """Widget for displaying a note"""
 
@@ -28,16 +51,17 @@ class NotesFrame(urwid.Frame):
     """"Frame for displaying notes and status"""
 
     def __init__(self, notes):
-        self.notes = notes
+        note_widgets = self._create_note_widgets(notes)
+        self.notes_listbox = urwid.ListBox(urwid.SimpleListWalker(note_widgets))
+        self.status = self._create_statusbar(notes)
+        urwid.Frame.__init__(self, self.notes_listbox, footer=self.status)
 
+
+    def _create_note_widgets(self, notes):
         note_widgets = []
         for note in notes:
             note_widgets.append(NoteWidget(note))
-
-        self.notes_listbox = urwid.ListBox(urwid.SimpleListWalker(note_widgets))
-        self.status = self._create_statusbar(notes)
-
-        urwid.Frame.__init__(self, self.notes_listbox, footer=self.status)
+        return note_widgets
 
 
     def _create_statusbar(self, notes):
@@ -47,14 +71,28 @@ class NotesFrame(urwid.Frame):
         return urwid.AttrMap(urwid.Padding(columns, left=1, right=1), 'highlight')
 
 
+    def draw_notes(self, notes):
+        note_widgets = self._create_note_widgets(notes)
+        self.body = urwid.ListBox(urwid.SimpleListWalker(note_widgets))
+        self.set_body(self.body)
+        self.footer = self._create_statusbar(notes)
+        self.set_footer(self.footer)
+
 class TagsListBox(urwid.ListBox):
     """ListBox widget for displaying a list of tags"""
 
     def __init__(self, tags):
-        self.tags = tags
+        tag_widgets = self._create_tag_widgets(tags)
+        urwid.ListBox.__init__(self, urwid.SimpleListWalker(tag_widgets))
 
+
+    def _create_tag_widgets(self, tags):
         tag_widgets = []
         for tag in tags:
             tag_widgets.append(urwid.Text(str(tag)))
+        return tag_widgets
 
-        urwid.ListBox.__init__(self, urwid.SimpleListWalker(tag_widgets))
+
+    def draw_tags(self, tags):
+        tag_widgets = self._create_tag_widgets(tags)
+        self.body = urwid.SimpleListWalker(tag_widgets)
