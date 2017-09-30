@@ -5,7 +5,12 @@ from urwid import (Columns,
                    ListBox,
                    AttrMap,
                    Padding,
-                   SimpleListWalker)
+                   SimpleListWalker,
+                   signals,
+                   connect_signal,
+                   emit_signal,
+                   Edit,
+                   WidgetWrap)
 from functools import reduce
 
 from . import version, title
@@ -35,6 +40,12 @@ class AerendeInterface(Columns):
         new_options = self.options('given', tag_list.get_max_width(tags),
                                    False)
         self.contents[0] = (tag_list, new_options)
+
+    def show_note_editor(self, done_handler):
+        self.notes_frame.show_note_editor(done_handler)
+
+    def get_note_editor(self):
+        return self.notes_frame.editor
 
 
 class NoteWidget(LineBox):
@@ -85,6 +96,12 @@ class NotesFrame(Frame):
         self.footer = self._create_statusbar(notes)
         self.set_footer(self.footer)
 
+    def show_note_editor(self, done_handler):
+        self.editor = NoteEditor(done_handler)
+        self.footer = self.editor
+        self.set_footer(self.footer)
+        self.set_focus('footer')
+
 
 class TagsListBox(ListBox):
     """ListBox widget for displaying a list of tags"""
@@ -111,3 +128,53 @@ class TagsListBox(ListBox):
                                 x if len(str(x)) > len(str(y)) else y),
                         tags))) + 2
         return max(min(max_width, width), min_width)
+
+
+class NoteEditor(WidgetWrap):
+
+    __metaclass__ = signals.MetaSignals
+    signals = ['done']
+
+    def __init__(self, done_handler, note=None):
+        self.modes = ['title', 'tags', 'text']
+        self.mode = self.modes[0]
+        if note is None:
+            self.title = ''
+            self.tags = ''
+            self.text = ''
+            self.editor = Edit(u'title :: ', '')
+
+        connect_signal(self, 'done', done_handler)
+        WidgetWrap.__init__(self, self.editor)
+
+    def keypress(self, size, key):
+        if key == 'enter':
+            if self.mode == 'title':
+                self.title = self.editor.get_edit_text()
+                self.init_tags_mode()
+            elif self.mode == 'tags':
+                self.tags = self.editor.get_edit_text()
+                self.init_text_mode()
+            elif self.mode == 'text':
+                self.text = self.editor.get_edit_text()
+                self.emit_done((self.title, self.tags, self.text))
+
+        elif key == 'esc':
+            self.emit_done()
+            return
+
+        size = size,
+        self.editor.keypress(size, key)
+
+    def init_tags_mode(self):
+        self.mode = self.modes[1]
+        self.editor.set_caption('tags :: ')
+        self.editor.set_edit_text('')
+
+    def init_text_mode(self):
+        self.mode = self.modes[2]
+        self.editor.set_caption('text :: ')
+        self.editor.set_edit_text('')
+
+    def emit_done(self, note=None):
+        emit_signal(self, 'done', note)

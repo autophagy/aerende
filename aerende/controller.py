@@ -3,9 +3,45 @@ import yaml
 from os import path
 import uuid
 from urwid import MainLoop
+from functools import reduce
 
-from .configuration import PALETTE
+from .configuration import PALETTE, KEY_BINDINGS
 from .models import Note, Tag
+
+
+class KeyHandler(object):
+
+    def __init__(self, controller):
+        self.controller = controller
+        self.editor = False
+
+    def handle(self, input, *args, **kwargs):
+        if self.is_keyboard_input(input):
+            key = ''.join(input)
+            self.handle_key(key)
+
+    def is_key_bound(self, key, name):
+        try:
+            bound_key = KEY_BINDINGS[name]
+        except KeyError:
+            return False
+        else:
+            return key == bound_key
+
+    def is_keyboard_input(self, input):
+        if input:
+            return reduce(lambda x, y: x and y,
+                          map(lambda s: isinstance(s, str), input))
+
+    def handle_key(self, key):
+        if self.controller.editor_mode:
+            size = 20
+            self.editor.keypress(size, key)
+            return
+
+        if not self.controller.editor_mode:
+            if self.is_key_bound(key, 'new_note'):
+                self.controller.show_note_editor()
 
 
 class Controller(object):
@@ -16,8 +52,12 @@ class Controller(object):
         self.notes = self.load_notes()
         self.tags = self.load_tags(self.notes)
         self.interface = interface
+        self.editor_mode = False
 
-        loop = MainLoop(interface, PALETTE)
+        self.key_handler = KeyHandler(self)
+        loop = MainLoop(interface,
+                        PALETTE,
+                        input_filter=self.key_handler.handle)
         self.refresh_interface()
         loop.run()
 
@@ -45,7 +85,9 @@ class Controller(object):
     def write_notes(self):
         with open(self.data_path, 'w') as data_file:
             for note in self.notes:
-                yaml.dump(note.to_dictionary(), data_file, default_flow_style=False)
+                yaml.dump(note.to_dictionary(),
+                          data_file,
+                          default_flow_style=False)
 
     def create_note(self, title, tags, text):
         note = Note(title, tags, text)
@@ -72,6 +114,26 @@ class Controller(object):
         self.interface.draw_notes(self.notes)
         self.tags = self.load_tags(self.notes)
         self.interface.draw_tags(self.tags)
+
+    def show_note_editor(self):
+        self.editor_mode = True
+        self.interface.show_note_editor(self.edit_note_handler)
+        self.key_handler.editor = self.interface.get_note_editor()
+
+    def edit_note_handler(self, note):
+        title = note[0]
+        tags = self._convert_tag_input(note[1])
+        text = note[2]
+
+        self.create_note(title, tags, text)
+        self.write_notes()
+        self.refresh_interface()
+
+        self.editor_mode = False
+
+    def _convert_tag_input(self, tag_text):
+        split_tags = tag_text.split('//')
+        return list(map(lambda tag: tag.strip(), split_tags))
 
     def exit(self):
         exit()
