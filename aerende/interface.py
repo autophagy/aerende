@@ -12,6 +12,8 @@ from urwid import (Columns,
                    Edit,
                    WidgetWrap)
 from functools import reduce
+import sys, tempfile, os
+from subprocess import call
 
 from . import version, title
 
@@ -155,9 +157,6 @@ class NoteEditor(WidgetWrap):
             elif self.mode == 'tags':
                 self.tags = self.editor.get_edit_text()
                 self.init_text_mode()
-            elif self.mode == 'text':
-                self.text = self.editor.get_edit_text()
-                self.emit_done((self.title, self.tags, self.text))
 
         elif key == 'esc':
             self.emit_done()
@@ -173,8 +172,13 @@ class NoteEditor(WidgetWrap):
 
     def init_text_mode(self):
         self.mode = self.modes[2]
-        self.editor.set_caption('text :: ')
-        self.editor.set_edit_text('')
+        editor = os.environ.get('EDITOR', 'vim')
+        with tempfile.NamedTemporaryFile(prefix="aerende_tmp", suffix=".tmp") as temp:
+            call([editor, temp.name])
+            temp.seek(0)
+            self.text = temp.read().decode('utf-8')
+            os.system('clear')
+            self.emit_done((self.title, self.tags, self.text))
 
     def emit_done(self, note=None):
         emit_signal(self, 'done', note)

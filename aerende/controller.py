@@ -55,11 +55,11 @@ class Controller(object):
         self.editor_mode = False
 
         self.key_handler = KeyHandler(self)
-        loop = MainLoop(interface,
+        self.loop = MainLoop(interface,
                         PALETTE,
                         input_filter=self.key_handler.handle)
         self.refresh_interface()
-        loop.run()
+        self.loop.run()
 
     def load_notes(self):
         # If no notes, create empty file
@@ -128,6 +128,10 @@ class Controller(object):
         self.create_note(title, tags, text)
         self.write_notes()
         self.refresh_interface()
+
+        # Restart the loop.. Seems to work?
+        self.loop.stop()
+        self.loop.start()
 
         self.editor_mode = False
 
