@@ -26,7 +26,7 @@ class Note(object):
         return {
             self.id: {
                 'title': self.title,
-                'tags': str(self.tags),
+                'tags': self.tags,
                 'text': self.text,
                 'priority': self.priority,
             }

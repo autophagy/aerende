@@ -91,7 +91,8 @@ class TagsListBox(ListBox):
 
     def __init__(self, tags):
         tag_widgets = self._create_tag_widgets(tags)
-        ListBox.__init__(self, SimpleListWalker(tag_widgets))
+        self.list_content = SimpleListWalker(tag_widgets)
+        ListBox.__init__(self, self.list_content)
 
     def _create_tag_widgets(self, tags):
         tag_widgets = []
@@ -101,7 +102,7 @@ class TagsListBox(ListBox):
 
     def draw_tags(self, tags):
         tag_widgets = self._create_tag_widgets(tags)
-        self.body = SimpleListWalker(tag_widgets)
+        self.list_content[:] = tag_widgets
 
     def get_max_width(self, tags):
         max_width = 30

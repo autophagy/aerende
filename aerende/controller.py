@@ -15,10 +15,10 @@ class Controller(object):
         self.data_path = path.expanduser(self.config['data_path'])
         self.notes = self.load_notes()
         self.tags = self.load_tags(self.notes)
+        self.interface = interface
 
         loop = MainLoop(interface, PALETTE)
-        interface.draw_notes(self.notes)
-        interface.draw_tags(self.tags)
+        self.refresh_interface()
         loop.run()
 
     def load_notes(self):
@@ -31,13 +31,12 @@ class Controller(object):
                 if note_yaml is None:
                     return notes
 
-                for note_yaml_item in note_yaml:
-                    for unique_id, note in note_yaml_item.items():
-                        notes.append(Note(note['title'],
-                                          note['tags'],
-                                          note['text'],
-                                          note['priority'],
-                                          unique_id))
+                for unique_id, note in note_yaml.items():
+                    notes.append(Note(note['title'],
+                                      note['tags'],
+                                      note['text'],
+                                      note['priority'],
+                                      unique_id))
                 return notes
         else:
             open(self.data_path, 'x')
@@ -45,11 +44,12 @@ class Controller(object):
 
     def write_notes(self):
         with open(self.data_path, 'w') as data_file:
-            yaml.dump(self.notes, data_file, default_flow_style=False)
+            for note in self.notes:
+                yaml.dump(note.to_dictionary(), data_file, default_flow_style=False)
 
     def create_note(self, title, tags, text):
         note = Note(title, tags, text)
-        self.notes.append(note.to_dictionary())
+        self.notes.append(note)
 
     def delete_note(self, unique_id):
         del self.notes[unique_id]
@@ -67,6 +67,11 @@ class Controller(object):
         for tag in tags:
             tag_widgets.append(Tag(tag, tags[tag]))
         return tag_widgets
+
+    def refresh_interface(self):
+        self.interface.draw_notes(self.notes)
+        self.tags = self.load_tags(self.notes)
+        self.interface.draw_tags(self.tags)
 
     def exit(self):
         exit()
