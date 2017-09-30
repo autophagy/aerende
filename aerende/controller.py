@@ -2,7 +2,7 @@ from pathlib import Path
 import yaml
 from os import path
 import uuid
-from urwid import MainLoop
+from urwid import MainLoop, ExitMainLoop
 from functools import reduce
 
 from .configuration import PALETTE, KEY_BINDINGS
@@ -42,6 +42,8 @@ class KeyHandler(object):
         if not self.controller.editor_mode:
             if self.is_key_bound(key, 'new_note'):
                 self.controller.show_note_editor()
+            elif self.is_key_bound(key, 'quit'):
+                self.controller.exit()
 
 
 class Controller(object):
@@ -56,8 +58,8 @@ class Controller(object):
 
         self.key_handler = KeyHandler(self)
         self.loop = MainLoop(interface,
-                        PALETTE,
-                        input_filter=self.key_handler.handle)
+                             PALETTE,
+                             input_filter=self.key_handler.handle)
         self.refresh_interface()
         self.loop.run()
 
@@ -140,4 +142,4 @@ class Controller(object):
         return list(map(lambda tag: tag.strip(), split_tags))
 
     def exit(self):
-        exit()
+        raise ExitMainLoop()

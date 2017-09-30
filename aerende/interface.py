@@ -12,7 +12,9 @@ from urwid import (Columns,
                    Edit,
                    WidgetWrap)
 from functools import reduce
-import sys, tempfile, os
+import sys
+import tempfile
+import os
 from subprocess import call
 
 from . import version, title
@@ -173,7 +175,8 @@ class NoteEditor(WidgetWrap):
     def init_text_mode(self):
         self.mode = self.modes[2]
         editor = os.environ.get('EDITOR', 'vim')
-        with tempfile.NamedTemporaryFile(prefix="aerende_tmp", suffix=".tmp") as temp:
+        with tempfile.NamedTemporaryFile(prefix="aerende_tmp",
+                                         suffix=".tmp") as temp:
             call([editor, temp.name])
             temp.seek(0)
             self.text = temp.read().decode('utf-8')

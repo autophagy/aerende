@@ -3,5 +3,6 @@ PALETTE = [
 ]
 
 KEY_BINDINGS = {
-    'new_note': 'n'
+    'new_note': 'n',
+    'quit': 'q'
 }
