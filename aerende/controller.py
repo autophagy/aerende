@@ -123,18 +123,19 @@ class Controller(object):
         self.key_handler.editor = self.interface.get_note_editor()
 
     def edit_note_handler(self, note):
-        title = note[0]
-        tags = self._convert_tag_input(note[1])
-        text = note[2]
+        if note is not None:
+            title = note[0]
+            tags = self._convert_tag_input(note[1])
+            text = note[2]
 
-        self.create_note(title, tags, text)
-        self.write_notes()
+            self.create_note(title, tags, text)
+            self.write_notes()
+
+            # Restart the loop.. Seems to work?
+            self.loop.stop()
+            self.loop.start()
+
         self.refresh_interface()
-
-        # Restart the loop.. Seems to work?
-        self.loop.stop()
-        self.loop.start()
-
         self.editor_mode = False
 
     def _convert_tag_input(self, tag_text):
