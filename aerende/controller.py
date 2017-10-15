@@ -44,6 +44,10 @@ class KeyHandler(object):
                 self.controller.show_note_editor()
             elif self.is_key_bound(key, 'quit'):
                 self.controller.exit()
+            elif self.is_key_bound(key, 'next_note'):
+                self.controller.focus_next_note()
+            elif self.is_key_bound(key, 'previous_note'):
+                self.controller.focus_previous_note()
 
 
 class Controller(object):
@@ -144,3 +148,9 @@ class Controller(object):
 
     def exit(self):
         raise ExitMainLoop()
+
+    def focus_next_note(self):
+        self.interface.focus_next_note()
+
+    def focus_previous_note(self):
+        self.interface.focus_previous_note()

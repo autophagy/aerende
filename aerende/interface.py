@@ -51,6 +51,12 @@ class AerendeInterface(Columns):
     def get_note_editor(self):
         return self.notes_frame.editor
 
+    def focus_next_note(self):
+        self.notes_frame.focus_next_note()
+
+    def focus_previous_note(self):
+        self.notes_frame.focus_previous_note()
+
 
 class NoteWidget(LineBox):
     """Widget for displaying a note"""
@@ -71,20 +77,26 @@ class NoteWidget(LineBox):
         footer_template = "[ {0} ]"
         return footer_template.format(" // ".join(note.tags))
 
+    def selectable(self):
+        return True
+
 
 class NotesFrame(Frame):
     """"Frame for displaying notes and status"""
 
     def __init__(self, notes):
         note_widgets = self._create_note_widgets(notes)
-        self.notes = ListBox(SimpleListWalker(note_widgets))
+        self.notes = NotesListBox(note_widgets)
+        self.notes.focus_first()
         self.status = self._create_statusbar(notes)
         Frame.__init__(self, self.notes, footer=self.status)
 
     def _create_note_widgets(self, notes):
         note_widgets = []
         for note in notes:
-            note_widgets.append(NoteWidget(note))
+            note_widgets.append(AttrMap(NoteWidget(note),
+                                        None,
+                                        'highlight_note'))
         return note_widgets
 
     def _create_statusbar(self, notes):
@@ -95,7 +107,7 @@ class NotesFrame(Frame):
 
     def draw_notes(self, notes):
         note_widgets = self._create_note_widgets(notes)
-        self.body = ListBox(SimpleListWalker(note_widgets))
+        self.body = NotesListBox(note_widgets)
         self.set_body(self.body)
         self.footer = self._create_statusbar(notes)
         self.set_footer(self.footer)
@@ -105,6 +117,12 @@ class NotesFrame(Frame):
         self.footer = self.editor
         self.set_footer(self.footer)
         self.set_focus('footer')
+
+    def focus_next_note(self):
+        self.body.focus_next()
+
+    def focus_previous_note(self):
+        self.body.focus_previous()
 
 
 class TagsListBox(ListBox):
@@ -185,3 +203,33 @@ class NoteEditor(WidgetWrap):
 
     def emit_done(self, note=None):
         emit_signal(self, 'done', note)
+
+
+class NotesListBox(ListBox):
+
+    def __init__(self, contents):
+        ListBox.__init__(self, SimpleListWalker(contents))
+
+    def focus_next(self):
+        _, position = self.get_focus()
+        if position is None:
+            return
+
+        if position + 1 >= len(self.body):
+            self.set_focus(position)
+        else:
+            self.set_focus(position + 1)
+
+    def focus_previous(self):
+        _, position = self.get_focus()
+        if position is None:
+            return
+
+        if position - 1 < 0:
+            self.set_focus(position)
+        else:
+            self.set_focus(position - 1)
+
+    def focus_first(self):
+        if len(self.body):
+            self.set_focus(0)
