@@ -116,7 +116,7 @@ class NotesFrame(Frame):
         self.set_footer(self.footer)
 
     def show_note_editor(self, done_handler):
-        self.editor = NoteEditor(done_handler)
+        self.editor = AttrMap(NoteEditor(done_handler), 'highlight')
         self.footer = self.editor
         self.set_footer(self.footer)
         self.set_focus('footer')
