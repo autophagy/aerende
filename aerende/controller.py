@@ -42,6 +42,8 @@ class KeyHandler(object):
         if not self.controller.editor_mode:
             if self.is_key_bound(key, 'new_note'):
                 self.controller.show_note_editor()
+            elif self.is_key_bound(key, 'delete_note'):
+                self.controller.delete_focused_note()
             elif self.is_key_bound(key, 'quit'):
                 self.controller.exit()
             elif self.is_key_bound(key, 'next_note'):
@@ -100,7 +102,17 @@ class Controller(object):
         self.notes.append(note)
 
     def delete_note(self, unique_id):
-        del self.notes[unique_id]
+        for index, note in enumerate(self.notes):
+            if note.id == unique_id:
+                del self.notes[index]
+                break
+
+    def delete_focused_note(self):
+        note = self.interface.get_focused_note()
+        self.delete_note(note.id)
+        self.write_notes()
+
+        self.refresh_interface()
 
     def load_tags(self, notes):
         tags = {'ALL': 0}

@@ -57,6 +57,9 @@ class AerendeInterface(Columns):
     def focus_previous_note(self):
         self.notes_frame.focus_previous_note()
 
+    def get_focused_note(self):
+        return self.notes_frame.get_focused_note()
+
 
 class NoteWidget(LineBox):
     """Widget for displaying a note"""
@@ -123,6 +126,10 @@ class NotesFrame(Frame):
 
     def focus_previous_note(self):
         self.body.focus_previous()
+
+    def get_focused_note(self):
+        note_widget, _ = self.body.get_focus()
+        return note_widget.original_widget.note
 
 
 class TagsListBox(ListBox):
