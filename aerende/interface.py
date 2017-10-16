@@ -114,6 +114,7 @@ class NotesFrame(Frame):
         self.set_body(self.body)
         self.footer = self._create_statusbar(notes)
         self.set_footer(self.footer)
+        self.body.focus_first()
 
     def show_note_editor(self, done_handler):
         self.editor = AttrMap(NoteEditor(done_handler), 'highlight')
@@ -226,6 +227,7 @@ class NotesListBox(ListBox):
             self.set_focus(position)
         else:
             self.set_focus(position + 1)
+        self.set_selected_style()
 
     def focus_previous(self):
         _, position = self.get_focus()
@@ -236,7 +238,16 @@ class NotesListBox(ListBox):
             self.set_focus(position)
         else:
             self.set_focus(position - 1)
+        self.set_selected_style()
 
     def focus_first(self):
         if len(self.body):
             self.set_focus(0)
+            self.set_selected_style()
+
+    def set_selected_style(self):
+        focused, position = self.get_focus()
+        focused.set_attr_map({None: 'highlight_note'})
+        for object in self.body:
+            if object is not focused:
+                object.set_attr_map({None: None})
