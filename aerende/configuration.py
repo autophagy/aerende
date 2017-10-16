@@ -1,6 +1,6 @@
 PALETTE = [
     ['highlight', 'black', 'white'],
-    ['highlight_note', 'dark red', 'default']
+    ['highlight_note', 'light blue', 'default']
 ]
 
 KEY_BINDINGS = {
