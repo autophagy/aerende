@@ -109,6 +109,7 @@ class NotesFrame(Frame):
         return AttrMap(Padding(columns, left=1, right=1), 'highlight')
 
     def draw_notes(self, notes):
+        notes.sort(key=lambda note: note.priority, reverse=True)
         note_widgets = self._create_note_widgets(notes)
         self.body = NotesListBox(note_widgets)
         self.set_body(self.body)

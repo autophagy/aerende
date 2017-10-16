@@ -44,6 +44,10 @@ class KeyHandler(object):
                 self.controller.show_note_editor()
             elif self.is_key_bound(key, 'delete_note'):
                 self.controller.delete_focused_note()
+            elif self.is_key_bound(key, 'increment_note_priority'):
+                self.controller.increment_focused_note_priority()
+            elif self.is_key_bound(key, 'decrement_note_priority'):
+                self.controller.decrement_focused_note_priority()
             elif self.is_key_bound(key, 'quit'):
                 self.controller.exit()
             elif self.is_key_bound(key, 'next_note'):
@@ -107,6 +111,12 @@ class Controller(object):
                 del self.notes[index]
                 break
 
+    def update_note(self, new_note):
+        for index, note in enumerate(self.notes):
+            if note.id == new_note.id:
+                note = new_note
+                break
+
     def delete_focused_note(self):
         note = self.interface.get_focused_note()
         self.delete_note(note.id)
@@ -127,6 +137,18 @@ class Controller(object):
         for tag in tags:
             tag_widgets.append(Tag(tag, tags[tag]))
         return tag_widgets
+
+    def increment_focused_note_priority(self):
+        note = self.interface.get_focused_note()
+        note.increment_priority()
+        self.write_notes()
+        self.refresh_interface()
+
+    def decrement_focused_note_priority(self):
+        note = self.interface.get_focused_note()
+        note.decrement_priority()
+        self.write_notes()
+        self.refresh_interface()
 
     def refresh_interface(self):
         self.interface.draw_notes(self.notes)

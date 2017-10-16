@@ -32,6 +32,12 @@ class Note(object):
             }
         }
 
+    def increment_priority(self):
+        self.priority += 1
+
+    def decrement_priority(self):
+        self.priority = 0 if self.priority - 1 < 0 else self.priority - 1
+
 
 class Tag(object):
     """A note tag, for categorisation/filtering"""
