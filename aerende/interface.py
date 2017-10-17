@@ -153,6 +153,7 @@ class TagsListBox(ListBox):
         return tag_widgets
 
     def draw_tags(self, tags):
+        tags.sort(key=lambda tag: tag.frequency, reverse=True)
         tag_widgets = self._create_tag_widgets(tags)
         self.list_content[:] = tag_widgets
 
