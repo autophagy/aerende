@@ -86,6 +86,9 @@ class NoteWidget(LineBox):
     def selectable(self):
         return True
 
+    def is_high_priority(self):
+        return self.note.priority >= 10
+
 
 class NotesFrame(Frame):
     """"Frame for displaying notes and status"""
@@ -261,4 +264,7 @@ class NotesListBox(ListBox):
         focused.set_attr_map({None: 'highlight_note'})
         for object in self.body:
             if object is not focused:
-                object.set_attr_map({None: None})
+                if object.original_widget.is_high_priority():
+                    object.set_attr_map({None: 'high_priority'})
+                else:
+                    object.set_attr_map({None: None})
