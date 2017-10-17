@@ -57,6 +57,9 @@ class AerendeInterface(Columns):
     def focus_previous_note(self):
         self.notes_frame.focus_previous_note()
 
+    def focus_first_note(self):
+        self.notes_frame.focus_first_note()
+
     def get_focused_note(self):
         return self.notes_frame.get_focused_note()
 
@@ -111,11 +114,9 @@ class NotesFrame(Frame):
     def draw_notes(self, notes):
         notes.sort(key=lambda note: note.priority, reverse=True)
         note_widgets = self._create_note_widgets(notes)
-        self.body = NotesListBox(note_widgets)
-        self.set_body(self.body)
+        self.body.refresh_notes(note_widgets)
         self.footer = self._create_statusbar(notes)
         self.set_footer(self.footer)
-        self.body.focus_first()
 
     def show_note_editor(self, done_handler):
         self.editor = AttrMap(NoteEditor(done_handler), 'highlight')
@@ -128,6 +129,9 @@ class NotesFrame(Frame):
 
     def focus_previous_note(self):
         self.body.focus_previous()
+
+    def focus_first_note(self):
+        self.body.focus_first()
 
     def get_focused_note(self):
         note_widget, _ = self.body.get_focus()
@@ -217,7 +221,12 @@ class NoteEditor(WidgetWrap):
 class NotesListBox(ListBox):
 
     def __init__(self, contents):
-        ListBox.__init__(self, SimpleListWalker(contents))
+        self.list_walker = SimpleListWalker(contents)
+        ListBox.__init__(self, self.list_walker)
+
+    def refresh_notes(self, notes):
+        self.list_walker[:] = notes
+        self.set_selected_style()
 
     def focus_next(self):
         _, position = self.get_focus()

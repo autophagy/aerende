@@ -71,6 +71,7 @@ class Controller(object):
                              PALETTE,
                              input_filter=self.key_handler.handle)
         self.refresh_interface()
+        self.interface.focus_first_note()
         self.loop.run()
 
     def load_notes(self):
