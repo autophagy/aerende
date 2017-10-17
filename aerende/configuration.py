@@ -1,5 +1,6 @@
 PALETTE = [
-    ['highlight', 'black', 'white'],
+    ['status_bar', 'black', 'white'],
+    ['edit_bar', 'black', 'light red'],
     ['highlight_note', 'light blue', 'default'],
     ['high_priority', 'light red', 'default']
 ]

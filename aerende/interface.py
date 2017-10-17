@@ -112,7 +112,7 @@ class NotesFrame(Frame):
         aerende_text = Text("{0} :: {1}".format(title, version))
         notes_text = Text(" [ {0} ]".format(len(notes)), align='right')
         columns = Columns([aerende_text, notes_text])
-        return AttrMap(Padding(columns, left=1, right=1), 'highlight')
+        return AttrMap(Padding(columns, left=1, right=1), 'status_bar')
 
     def draw_notes(self, notes):
         notes.sort(key=lambda note: note.priority, reverse=True)
@@ -123,7 +123,7 @@ class NotesFrame(Frame):
 
     def show_note_editor(self, done_handler, note_to_edit=None):
         self.editor = AttrMap(NoteEditor(done_handler, note_to_edit), 
-                              'highlight')
+                              'edit_bar')
         self.footer = self.editor
         self.set_footer(self.footer)
         self.set_focus('footer')
