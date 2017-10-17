@@ -7,6 +7,7 @@ PALETTE = [
 KEY_BINDINGS = {
     'new_note': 'n',
     'delete_note': 'd',
+    'edit_note': 'e',
     'increment_note_priority': '+',
     'decrement_note_priority': '-',
     'quit': 'q',

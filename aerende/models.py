@@ -38,6 +38,15 @@ class Note(object):
     def decrement_priority(self):
         self.priority = 0 if self.priority - 1 < 0 else self.priority - 1
 
+    def formatted_tags(self):
+        return " // ".join(self.tags)
+
+    def edit_note(self, title, tags, text):
+        self.title = title
+        self.tags = tags
+        self.tags = self.__verify_tags(tags)
+        self.text = text
+
 
 class Tag(object):
     """A note tag, for categorisation/filtering"""

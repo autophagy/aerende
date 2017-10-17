@@ -45,8 +45,8 @@ class AerendeInterface(Columns):
                                    False)
         self.contents[0] = (tag_list, new_options)
 
-    def show_note_editor(self, done_handler):
-        self.notes_frame.show_note_editor(done_handler)
+    def show_note_editor(self, done_handler, note_to_edit=None):
+        self.notes_frame.show_note_editor(done_handler, note_to_edit)
 
     def get_note_editor(self):
         return self.notes_frame.editor
@@ -81,7 +81,7 @@ class NoteWidget(LineBox):
 
     def _create_footer(self, note):
         footer_template = "[ {0} ]"
-        return footer_template.format(" // ".join(note.tags))
+        return footer_template.format(note.formatted_tags())
 
     def selectable(self):
         return True
@@ -121,8 +121,9 @@ class NotesFrame(Frame):
         self.footer = self._create_statusbar(notes)
         self.set_footer(self.footer)
 
-    def show_note_editor(self, done_handler):
-        self.editor = AttrMap(NoteEditor(done_handler), 'highlight')
+    def show_note_editor(self, done_handler, note_to_edit=None):
+        self.editor = AttrMap(NoteEditor(done_handler, note_to_edit), 
+                              'highlight')
         self.footer = self.editor
         self.set_footer(self.footer)
         self.set_focus('footer')
@@ -177,12 +178,17 @@ class NoteEditor(WidgetWrap):
     def __init__(self, done_handler, note=None):
         self.modes = ['title', 'tags', 'text']
         self.mode = self.modes[0]
+        self.note = note
         if note is None:
             self.title = ''
             self.tags = ''
             self.text = ''
-            self.editor = Edit(u'title :: ', '')
+        else:
+            self.title = note.title
+            self.tags = note.formatted_tags()
+            self.text = note.text
 
+        self.editor = Edit(u'title :: ', self.title)
         connect_signal(self, 'done', done_handler)
         WidgetWrap.__init__(self, self.editor)
 
@@ -205,13 +211,15 @@ class NoteEditor(WidgetWrap):
     def init_tags_mode(self):
         self.mode = self.modes[1]
         self.editor.set_caption('tags :: ')
-        self.editor.set_edit_text('')
+        self.editor.set_edit_text(self.tags)
 
     def init_text_mode(self):
         self.mode = self.modes[2]
         editor = os.environ.get('EDITOR', 'vim')
         with tempfile.NamedTemporaryFile(prefix="aerende_tmp",
                                          suffix=".tmp") as temp:
+            temp.write(self.text.encode('utf-8'))
+            temp.flush()
             call([editor, temp.name])
             temp.seek(0)
             self.text = temp.read().decode('utf-8')
@@ -219,7 +227,7 @@ class NoteEditor(WidgetWrap):
             self.emit_done((self.title, self.tags, self.text))
 
     def emit_done(self, note=None):
-        emit_signal(self, 'done', note)
+        emit_signal(self, 'done', note, self.note)
 
 
 class NotesListBox(ListBox):

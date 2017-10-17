@@ -41,9 +41,13 @@ class KeyHandler(object):
 
         if not self.controller.editor_mode:
             if self.is_key_bound(key, 'new_note'):
-                self.controller.show_note_editor()
+                self.controller.show_note_editor(
+                    self.controller.edit_note_handler)
             elif self.is_key_bound(key, 'delete_note'):
                 self.controller.delete_focused_note()
+            elif self.is_key_bound(key, 'edit_note'):
+                self.controller.show_note_editor(
+                    self.controller.edit_note_handler, True)
             elif self.is_key_bound(key, 'increment_note_priority'):
                 self.controller.increment_focused_note_priority()
             elif self.is_key_bound(key, 'decrement_note_priority'):
@@ -156,18 +160,24 @@ class Controller(object):
         self.tags = self.load_tags(self.notes)
         self.interface.draw_tags(self.tags)
 
-    def show_note_editor(self):
+    def show_note_editor(self, note_handler, edit_focused_note=False):
+        note_to_edit = None
+        if edit_focused_note:
+            note_to_edit = self.interface.get_focused_note()
         self.editor_mode = True
-        self.interface.show_note_editor(self.edit_note_handler)
+        self.interface.show_note_editor(note_handler, note_to_edit)
         self.key_handler.editor = self.interface.get_note_editor()
 
-    def edit_note_handler(self, note):
+    def edit_note_handler(self, note, original_note=None):
         if note is not None:
             title = note[0]
             tags = self._convert_tag_input(note[1])
             text = note[2]
-
-            self.create_note(title, tags, text)
+            if original_note is not None:
+                original_note.edit_note(title, tags, text)
+                self.update_note(original_note)
+            else:
+                self.create_note(title, tags, text)
             self.write_notes()
 
             # Restart the loop.. Seems to work?
