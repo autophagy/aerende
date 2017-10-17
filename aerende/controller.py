@@ -22,11 +22,11 @@ class KeyHandler(object):
 
     def is_key_bound(self, key, name):
         try:
-            bound_key = KEY_BINDINGS[name]
+            bound_keys = KEY_BINDINGS[name]
         except KeyError:
             return False
         else:
-            return key == bound_key
+            return key in bound_keys
 
     def is_keyboard_input(self, input):
         if input:

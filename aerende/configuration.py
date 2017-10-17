@@ -11,6 +11,6 @@ KEY_BINDINGS = {
     'increment_note_priority': '+',
     'decrement_note_priority': '-',
     'quit': 'q',
-    'next_note': 'j',
-    'previous_note': 'k'
+    'next_note': ['j', 'down'],
+    'previous_note': ['k', 'up']
 }
