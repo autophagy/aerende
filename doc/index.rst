@@ -1,24 +1,10 @@
-aerende
-==================================
+.. figure:: _static/title.png
 
-About
------
-
-aerende is a small, python based reminders application. Works offline and in
+Ærende is a small, python based note taking application. Works offline and in
 the terminal via a curses interface. Navigation via vim-esque keys. Designed to
 slot easily into my comm workspace alongside weechat and neomutt.
 
-.. image:: _static/mockup.png
-
-To-Do
------
-
-- [X] Usage documentation (shortcuts, etc)
-- [X] Curses inteface design
-- [ ] Curses interface prototype
-- [ ] Simple reminder CRUD
-- [ ] Reminder categories
-- [ ] Reminder deadlines
+.. figure:: _static/screenshot.png
 
 .. toctree::
    :maxdepth: 2
@@ -31,4 +17,5 @@ To-Do
    :caption: Usage
 
    usage/create-edit-delete-notes
+   usage/configuration
    usage/keybindings

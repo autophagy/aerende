@@ -4,21 +4,24 @@ Keybindings
 Navigation
 ----------
 
-- ``hjkl`` :: move left/down/up/right in the notes list
-- ``ctrl+j`` :: move down the categories list
-- ``ctrl+k`` :: move up the categories list
-- ``shift+j`` :: decrement a note's priority
-- ``shift+k`` :: increment a note's priority
+====== =================================
+Key    Action
+====== =================================
+``j``  Move the note focus down the list
+``k``  Move the note focus up the list
+``+``  Increment a note's priority
+``-``  Decrement a note's priority
+====== =================================
 
 Note Creation/Editing/Deleting
 ------------------------------
 
-- ``n`` :: creates a new note
-- ``e`` :: edits a note
-- ``d`` :: deletes a note
-- ``c`` :: clones a note
+====== =======================
+Key    Action
+====== =======================
+``n``  Create a new note
+``e``  Edit the focused note
+``d``  Delete the focused note
+====== =======================
 
-Misc
-----
 
-- ``?`` :: displays help

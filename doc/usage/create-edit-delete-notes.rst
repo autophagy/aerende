@@ -1,14 +1,17 @@
 Creating, Editing and Deleting Notes
 ====================================
 
-Notes can be created by the ``n`` shortcut. This will prompt you for a note
-title, a comma seperated list of categories (entering nothing will assign it a
-``none`` category), and then an editor will open for the note.
+Notes can be created via ``n``. The note editor prompt will open at the bottom,
+requiring a note title, a ``//`` seperated list of note tags, and then the default
+editor will open for the note's content.
 
-Notes can be edited by using the ``e`` shortcut. You will then be asked for the
-title, categories and text of the note.
+Editing a note is done via ``e``. This will open the same note editor prompt, but
+with the note's current values autofilled.
 
-Notes can be deleted by using the ``d`` shortcut. A note can be cloned using the
-``c`` shortcut. Notes can have their priority decremented/incremented via 
-``shift+k`` and ``shift+j`` respectively. 
+The note editing prompt can be cancelled with esc.
 
+Deleting a note is done via ``d``.
+
+A note's priority can be increased with ``+`` and decreased with ``-``. This
+priority affects the sorting of notes, and notes with a priority of >= 10 are
+considered high priority.
