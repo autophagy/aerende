@@ -269,7 +269,8 @@ class NotesListBox(ListBox):
 
     def set_selected_style(self):
         focused, position = self.get_focus()
-        focused.set_attr_map({None: 'highlight_note'})
+        if focused:
+            focused.set_attr_map({None: 'highlight_note'})
         for object in self.body:
             if object is not focused:
                 if object.original_widget.is_high_priority():
