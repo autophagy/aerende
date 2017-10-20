@@ -1,6 +1,9 @@
 ![aerende](doc/_static/title.png)
 
-[![Documentation Status](https://readthedocs.org/projects/aerende/badge/?version=latest)](http://aerende.readthedocs.io/en/latest/?badge=latest) [![Build Status](https://travis-ci.org/Autophagy/aerende.svg?branch=master)](https://travis-ci.org/Autophagy/aerende) [![Pypi Version](https://img.shields.io/pypi/v/aerende.svg)](https://pypi.python.org/pypi?:action=display&name=aerende)
+[![Documentation Status](https://readthedocs.org/projects/aerende/badge/?version=latest)](http://aerende.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/Autophagy/aerende.svg?branch=master)](https://travis-ci.org/Autophagy/aerende)
+[![Pypi Version](https://img.shields.io/pypi/v/aerende.svg)](https://pypi.python.org/pypi?:action=display&name=aerende)
+[![Python](https://img.shields.io/pypi/pyversions/aerende.svg)](https://pypi.python.org/pypi?:action=display&name=aerende)
 
 Ærende is a tool to facilitate the recording of reminders, similar to post-it
 notes. Written in python, with a curses UI via the [urwid](http://urwid.org/)
