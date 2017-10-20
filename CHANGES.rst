@@ -1,10 +1,9 @@
-# Changelog
+=========
+Changelog
+=========
 
-## Unreleased Changes
-
-## Released
-
-### 0.1.1
+29 Hærfest 226 :: 0.1.1
+-----------------------
 
 First release of ærende ! 🎉🎉🎉
 
