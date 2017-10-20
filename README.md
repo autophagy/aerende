@@ -8,3 +8,22 @@ library. Documentation is available on
 [ReadTheDocs](https://aerende.readthedocs.io/en/latest/).
 
 ![aerende](doc/_static/screenshot.png)
+
+## Installation
+
+To install via the repo, you can set up a clean environment with ``virtualenv``:
+```
+virtualenv .venv -p python3.6
+source .venv/bin/activate
+```
+
+Then, install the ``aerende`` package:
+```
+pip install -e .
+```
+
+You can now run ``aerende``.
+
+## Tests
+
+You can run the tests via ``python -m unittest``

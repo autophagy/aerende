@@ -13,6 +13,14 @@ slot easily into my comm workspace alongside weechat and neomutt.
    :maxdepth: 2
    :caption: Contents:
 
+.. _installation:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Installation
+
+   installation/index
+
 .. _usage:
 
 .. toctree::
