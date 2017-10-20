@@ -12,6 +12,7 @@ def parse_args():
                         help='The aerende config file')
     return parser.parse_args()
 
+
 def main():
     try:
         args = parse_args()
@@ -21,6 +22,7 @@ def main():
         Controller(config=config, interface=interface)
     except KeyboardInterrupt:
         exit(0)
+
 
 if __name__ == '__main__':
     main()

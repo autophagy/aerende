@@ -2,6 +2,7 @@ from aerende.models import Note
 
 import unittest
 
+
 def init_note(**kwargs):
     default_note_args = {
         'title': 'Motoko',

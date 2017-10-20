@@ -73,7 +73,7 @@ class NoteWidget(LineBox):
         header = self._create_header(note)
         footer = self._create_footer(note)
         note_display = Text("{0}\n\n{1}\n\n{2}".format(
-                                  header, note.text, footer))
+            header, note.text, footer))
         LineBox.__init__(self, note_display)
 
     def _create_header(self, note):
@@ -122,7 +122,7 @@ class NotesFrame(Frame):
         self.set_footer(self.footer)
 
     def show_note_editor(self, done_handler, note_to_edit=None):
-        self.editor = AttrMap(NoteEditor(done_handler, note_to_edit), 
+        self.editor = AttrMap(NoteEditor(done_handler, note_to_edit),
                               'edit_bar')
         self.footer = self.editor
         self.set_footer(self.footer)
@@ -166,7 +166,7 @@ class TagsListBox(ListBox):
         min_width = 18
         width = len(str(reduce((lambda x, y:
                                 x if len(str(x)) > len(str(y)) else y),
-                        tags))) + 2
+                               tags))) + 2
         return max(min(max_width, width), min_width)
 
 

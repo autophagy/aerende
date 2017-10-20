@@ -50,6 +50,7 @@ class Note(object):
 
 class Tag(object):
     """A note tag, for categorisation/filtering"""
+
     def __init__(self, type, frequency):
         self.type = type
         self.frequency = frequency
