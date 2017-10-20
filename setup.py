@@ -3,20 +3,17 @@
 
 from setuptools import setup
 
-try:
-    with open('README.md', 'r', encoding='utf-8') as f:
-        readme = f.read()
-except IOError:
-    readme = ''
-
-
 setup(
     name='aerende',
+    version='0.1.1',
     author='Mika Naylor (Autophagy)',
     author_email='mail@autophagy.io',
     url='https://github.com/Autophagy/aerende',
     description='A post-it note/reminders tool',
-    long_description=readme,
+    long_description='''Ærende is a small, python based note taking application.
+        Works offline and in the terminal via a curses interface.
+        Navigation via vim-esque keys.
+        Designed to slot easily into my comm workspace alongside weechat and neomutt.''',
     entry_points={
         'console_scripts': [
             'aerende = aerende.__main__:main',
@@ -34,6 +31,4 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
     ],
-    use_scm_version=True,
-    setup_requires=['setuptools_scm']
 )
