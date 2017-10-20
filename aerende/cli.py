@@ -1,10 +1,8 @@
-from os import path, makedirs
 import argparse
-import yaml
-from shutil import copy
 
 from .controller import Controller
 from .interface import AerendeInterface
+from .configuration import Configuration
 
 
 def parse_args():
@@ -14,22 +12,10 @@ def parse_args():
                         help='The aerende config file')
     return parser.parse_args()
 
-
-def get_config(file):
-    expanded_path = path.expanduser(file)
-    if not path.exists(expanded_path):
-        makedirs(path.dirname(expanded_path))
-        copy(path.join(path.dirname(__file__), 'config/default.yml'),
-             expanded_path)
-
-    with open(expanded_path, 'r') as config_file:
-        return yaml.load(config_file)
-
-
 def main():
     try:
         args = parse_args()
-        config = get_config(args.config)
+        config = Configuration(args.config)
         interface = AerendeInterface()
 
         Controller(config=config, interface=interface)

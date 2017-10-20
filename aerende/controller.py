@@ -5,14 +5,14 @@ import uuid
 from urwid import MainLoop, ExitMainLoop
 from functools import reduce
 
-from .configuration import PALETTE, KEY_BINDINGS
 from .models import Note, Tag
 
 
 class KeyHandler(object):
 
-    def __init__(self, controller):
+    def __init__(self, controller, config):
         self.controller = controller
+        self.config = config
         self.editor = False
 
     def handle(self, input, *args, **kwargs):
@@ -22,7 +22,7 @@ class KeyHandler(object):
 
     def is_key_bound(self, key, name):
         try:
-            bound_keys = KEY_BINDINGS[name]
+            bound_keys = self.config.get_key_bindings()[name]
         except KeyError:
             return False
         else:
@@ -64,15 +64,15 @@ class Controller(object):
 
     def __init__(self, config, interface):
         self.config = config
-        self.data_path = path.expanduser(self.config['data_path'])
+        self.data_path = path.expanduser(self.config.get_data_path())
         self.notes = self.load_notes()
         self.tags = self.load_tags(self.notes)
         self.interface = interface
         self.editor_mode = False
 
-        self.key_handler = KeyHandler(self)
+        self.key_handler = KeyHandler(self, config)
         self.loop = MainLoop(interface,
-                             PALETTE,
+                             config.get_palette(),
                              input_filter=self.key_handler.handle)
         self.refresh_interface()
         self.interface.focus_first_note()
