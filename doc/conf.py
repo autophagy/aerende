@@ -166,3 +166,5 @@ texinfo_documents = [
      author, 'aerende', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+html_logo = "_static/logo.png"
