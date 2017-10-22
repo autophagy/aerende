@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+
+"""
+aerende.cli
+-----------
+
+This module contains command line interface to launch aerende.
+Currently only takes 1 command line argument - the path to the config file
+to use.
+"""
+
 import argparse
 
 from .controller import Controller
@@ -6,10 +17,11 @@ from .configuration import Configuration
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='aerende')
+    parser = argparse.ArgumentParser(description='aerende :: post-it notes ' +
+                                                 'in the terminal')
     parser.add_argument('-c', '--config',
                         default='~/.andgeloman/aerende/config.yml',
-                        help='The aerende config file')
+                        help='The aerende config file to use.')
     return parser.parse_args()
 
 
