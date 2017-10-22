@@ -42,18 +42,17 @@ class TestNoteModel(unittest.TestCase):
         self.assertEqual(sorted(tags), sorted(note.tags))
 
     def test_priority(self):
-        note = init_note(priority=0)
+        note = init_note(priority=5)
+
+        note.change_priority(10)
+        self.assertEqual(15, note.priority)
+
+        note.change_priority(-5)
+        self.assertEqual(10, note.priority)
 
         # A note's priority cannnot be changed to below zero
-        note.decrement_priority()
+        note.change_priority(-100)
         self.assertEqual(0, note.priority)
-
-        note.increment_priority()
-        self.assertEqual(1, note.priority)
-
-        note.decrement_priority()
-        self.assertEqual(0, note.priority)
-
 
 if __name__ == '__main__':
     unittest.main()
