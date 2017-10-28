@@ -1,12 +1,30 @@
+# -*- coding: utf-8 -*-
+
+"""
+aerende.models
+-----------
+
+This module contains models for use within aerende. Currently contains 2
+models:
+
+Note - A representation of an aerende note, with a title, tag list, text and
+       priority.
+
+Tag - A representation of a tag with the number of times that tag occurs.
+"""
+
 import uuid
 
 
 class Note(object):
     """
     A note.
-    Currently has a title, tags, texr and a priority."""
+    Currently has a title, tags, text and a priority."""
 
     def __init__(self, title, tags, text, priority=1, unique_id=None):
+        """ If created without a unique_id, it is assumed the note is new
+        and so a new uuid is created.
+        """
         if unique_id is None:
             self.id = str(uuid.uuid4())
         else:
@@ -20,9 +38,14 @@ class Note(object):
         return str(self.to_dictionary)
 
     def __verify_tags(self, tags):
+        """ Removes any duplicate tags from the supplied list.
+        """
         return list(set(tags))
 
     def to_dictionary(self):
+        """ Returns a dictionary representation of the object, suitable for
+        writing out to YAML.
+        """
         return {
             self.id: {
                 'title': self.title,
@@ -39,9 +62,13 @@ class Note(object):
             self.priority += amount
 
     def formatted_tags(self):
+        """ Formats the note's tag list for displaying in the UI.
+        """
         return " // ".join(self.tags)
 
     def edit_note(self, title, tags, text):
+        """ Updates the note's properties
+        """
         self.title = title
         self.tags = tags
         self.tags = self.__verify_tags(tags)
