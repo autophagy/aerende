@@ -86,8 +86,10 @@ class Configuration(object):
         not exist at this path, create it from the default config settings.
         """
         expanded_path = path.expanduser(configuration_path)
-        if not path.exists(expanded_path):
+        if not path.exists(path.dirname(expanded_path)):
             makedirs(path.dirname(expanded_path))
+
+        if not path.exists(expanded_path):
             with open(expanded_path, 'w') as config_file:
                 yaml.dump(self.DEFAULT_CONFIG, config_file,
                           default_flow_style=False)

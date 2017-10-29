@@ -8,6 +8,9 @@ Unreleased
 * Changed the data options category in the configuration file from ``data_path``
   to ``data_options``.
 
+* Fixed bug where aerende would crash if the directory structure for the config
+  file existed, but the `config.yml` file was missing.
+
 29 Hærfest 226 :: 0.1.1
 -----------------------
 
