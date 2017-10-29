@@ -21,6 +21,14 @@ slot easily into my comm workspace alongside weechat and neomutt.
 
    installation/index
 
+.. _release_notes:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Release Notes
+
+   release_notes/index
+
 .. _usage:
 
 .. toctree::
