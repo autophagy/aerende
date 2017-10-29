@@ -2,6 +2,12 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+* Changed the data options category in the configuration file from ``data_path``
+  to ``data_options``.
+
 29 Hærfest 226 :: 0.1.1
 -----------------------
 
