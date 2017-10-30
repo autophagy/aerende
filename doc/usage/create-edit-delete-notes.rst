@@ -12,6 +12,7 @@ The note editing prompt can be cancelled with esc.
 
 Deleting a note is done via ``d``.
 
-A note's priority can be increased with ``+`` and decreased with ``-``. This
-priority affects the sorting of notes, and notes with a priority of >= 10 are
-considered high priority.
+A note's priority can be increased with ``+`` and decreased with ``-``. You can
+also increment and decrement a note's priority in intervals of 10 with ``alt +``
+and ``alt -``. This priority affects the sorting of notes, and notes with a
+priority of >= 10 are considered high priority.

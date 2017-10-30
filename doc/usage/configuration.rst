@@ -17,19 +17,23 @@ data_path Path to note data yml file ~/.andgeloman/aerende/data.yml
 Key Binding Options
 -------------------
 
-======================= ================================= ===============
-Option                  Description                       Default
-======================= ================================= ===============
-next_note               Move the note focus down the list ``j``, ``down``
-previous_note           Move the note focus up the list   ``k``, ``up``
-new_note                Create a new note                 ``n``
-edit_note               Edit the focused note             ``e``
-delete_note             Delete the focused note           ``d``
-increment_note_priority Increment the focused note's      ``+``
-                        priority.
-decrement_note_priority Decrement the focused note's      ``-``
-                        priority.
-======================= ================================= ===============
+=============================== ================================= ===============
+Option                          Description                       Default
+=============================== ================================= ===============
+next_note                       Move the note focus down the list ``j``, ``down``
+previous_note                   Move the note focus up the list   ``k``, ``up``
+new_note                        Create a new note                 ``n``
+edit_note                       Edit the focused note             ``e``
+delete_note                     Delete the focused note           ``d``
+increment_note_priority         Increment the focused note's      ``+``
+                                priority.
+super_increment_note_priority   Increment the focused note's      ``meta +``
+                                priority by 10.
+decrement_note_priority         Decrement the focused note's      ``-``
+                                priority.
+super_decrement_note_priority   Increment the focused note's      ``meta -``
+                                priority by 10.
+=============================== ================================= ===============
 
 Palette Options
 ---------------

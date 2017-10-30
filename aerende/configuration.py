@@ -50,7 +50,9 @@ class Configuration(object):
     # delete_note :: key to delete the focused note
     # edit_note :: key to edit the focused note
     # increment_note_priority :: key to increment the focused note's priority
+    # super_increment_note_priorty :: as above, but by +10
     # decrement_note_priority :: key to decrement the focused note's priority
+    # super_decrement_note_priority :: as above, but by -10
     # quit :: key to exit aerende
     # next_note :: focus the next note
     # previous_note :: focus the previous note
@@ -60,7 +62,9 @@ class Configuration(object):
         'delete_note': 'd',
         'edit_note': 'e',
         'increment_note_priority': '+',
+        'super_increment_note_priority': 'meta +',
         'decrement_note_priority': '-',
+        'super_decrement_note_priority': 'meta -',
         'quit': 'q',
         'next_note': ['j', 'down'],
         'previous_note': ['k', 'up']

@@ -11,6 +11,9 @@ Unreleased
 * Fixed bug where aerende would crash if the directory structure for the config
   file existed, but the `config.yml` file was missing.
 
+* Added super increment and decrement, which increases/decreases a note's
+  priority by 10.
+
 29 Hærfest 226 :: 0.1.1
 -----------------------
 

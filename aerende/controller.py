@@ -36,8 +36,12 @@ class KeyHandler(object):
             self.controller.edit_note_handler, True),
         'increment_note_priority': lambda self:
             self.controller.change_focused_note_priority(1),
+        'super_increment_note_priority': lambda self:
+            self.controller.change_focused_note_priority(10),
         'decrement_note_priority': lambda self:
             self.controller.change_focused_note_priority(-1),
+        'super_decrement_note_priority': lambda self:
+            self.controller.change_focused_note_priority(-10),
 
         # Note Navigation
 

@@ -17,14 +17,16 @@ Key    Action
 Note Creation/Editing/Deleting
 ------------------------------
 
-====== ===========================
-Key    Action
-====== ===========================
-``n``  Create a new note
-``e``  Edit the focused note
-``d``  Delete the focused note
-``+``  Increment a note's priority
-``-``  Decrement a note's priority
-====== ===========================
+=========== =================================
+Key         Action
+=========== =================================
+``n``       Create a new note
+``e``       Edit the focused note
+``d``       Delete the focused note
+``+``       Increment a note's priority
+``alt +``   Increment a note's priority by 10
+``-``       Decrement a note's priority
+``alt -``   Decrement a note's priority by 10
+=========== =================================
 
 
