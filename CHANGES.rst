@@ -16,6 +16,8 @@ Unreleased
 
 * Stripped whitespace from note text returned from editor.
 
+* Added an explanatory banner to the beginning of the default configuration.
+
 29 Hærfest 226 :: 0.1.1
 -----------------------
 

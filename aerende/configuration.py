@@ -76,6 +76,16 @@ class Configuration(object):
         'key_bindings': DEFAULT_KEY_BINDINGS
     }
 
+    # Banner to prepend to the default configuration if it does not exist.
+
+    CONFIG_BANNER = """# Aerende :: Configuration File
+#
+# Please see
+# https://aerende.readthedocs.io/en/latest/usage/configuration.html for a
+# complete reference of configuration options, as well as their effects.
+
+"""
+
     def __init__(self, configuration_path):
         """ On initialisation, preload the configuration options from the
         defaults.
@@ -95,6 +105,7 @@ class Configuration(object):
 
         if not path.exists(expanded_path):
             with open(expanded_path, 'w') as config_file:
+                config_file.write(self.CONFIG_BANNER)
                 yaml.dump(self.DEFAULT_CONFIG, config_file,
                           default_flow_style=False)
             self.palette = self.DEFAULT_PALETTE
