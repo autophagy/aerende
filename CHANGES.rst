@@ -14,6 +14,8 @@ Unreleased
 * Added super increment and decrement, which increases/decreases a note's
   priority by 10.
 
+* Stripped whitespace from note text returned from editor.
+
 29 Hærfest 226 :: 0.1.1
 -----------------------
 

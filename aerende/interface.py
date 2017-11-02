@@ -222,7 +222,7 @@ class NoteEditor(WidgetWrap):
             temp.flush()
             call([editor, temp.name])
             temp.seek(0)
-            self.text = temp.read().decode('utf-8')
+            self.text = temp.read().decode('utf-8').strip()
             os.system('clear')
             self.emit_done((self.title, self.tags, self.text))
 
