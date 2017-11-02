@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
+from aerende import version
 
 setup(
     name='aerende',
-    version='0.1.1',
+    version=version,
     author='Mika Naylor (Autophagy)',
     author_email='mail@autophagy.io',
     url='https://github.com/Autophagy/aerende',
@@ -24,7 +25,7 @@ setup(
         'PyYAML',
         'urwid'
     ],
-    python_requires='>=3.6',
+    python_requires='>=3',
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
