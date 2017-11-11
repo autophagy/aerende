@@ -1,9 +1,9 @@
-.. _configuration:
-
 Configuration
 =============
 
 The configuration file for ærende is located in `~/.andgeloman/aerende/config.yml`.
+
+.. _configuration:
 
 Data Path Options
 -----------------

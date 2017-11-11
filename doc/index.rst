@@ -1,5 +1,4 @@
-.. figure:: _static/title.png
-
+========
 Overview
 ========
 
@@ -9,9 +8,8 @@ slot easily into my comm workspace alongside weechat and neomutt.
 
 .. figure:: _static/screenshot.png
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+Contents
+--------
 
 .. _installation:
 

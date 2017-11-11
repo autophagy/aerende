@@ -2,7 +2,7 @@ Keybindings
 ===========
 
 These are the default keybindings for ærende. These can all be changed in the
-:ref:`configuration` settings.
+:doc:`configuration` settings.
 
 Navigation
 ----------
