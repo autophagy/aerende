@@ -54,5 +54,6 @@ class TestNoteModel(unittest.TestCase):
         note.change_priority(-100)
         self.assertEqual(0, note.priority)
 
+
 if __name__ == '__main__':
     unittest.main()
