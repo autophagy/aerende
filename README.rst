@@ -1,7 +1,6 @@
-.. image:: doc/_static/title.png
-    :alt: aerende
-    :align: center
-
+======
+Ærende
+======
 
 .. image:: https://readthedocs.org/projects/aerende/badge/?version=latest
     :target: http://aerende.readthedocs.io/en/latest/?badge=latest
@@ -21,8 +20,13 @@
 
 
 Ærende is a tool to facilitate the recording of reminders, similar to post-it
-notes. Written in python, with a curses UI via the `urwid`_ library. 
+notes. Written in python, with a curses UI via the `urwid`_ library.
 Documentation is available on `ReadTheDocs`_.
+
+.. image:: doc/_static/screenshot.png
+    :alt: aerende screenshot
+    :align: center
+
 
 Installation
 ============
@@ -57,7 +61,7 @@ To build the documentation, install the requirements via::
 
 In the `doc` folder, there is a Makefile to build the documentation. For example,
 to build the HTML documentation::
-  
+
   cd doc
   make html
 
