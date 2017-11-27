@@ -18,6 +18,10 @@
    :target: https://pypi.python.org/pypi/aerende/
    :alt: Python Version
 
+.. image:: http://scieldas.autophagy.io/licenses/MIT.svg
+   :target: LICENSE
+   :alt: MIT License
+
 
 Ærende is a tool to facilitate the recording of reminders, similar to post-it
 notes. Written in python, with a curses UI via the `urwid`_ library.
