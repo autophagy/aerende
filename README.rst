@@ -2,19 +2,19 @@
 Ærende
 ======
 
-.. image:: https://readthedocs.org/projects/aerende/badge/?version=latest
-    :target: http://aerende.readthedocs.io/en/latest/?badge=latest
+.. image:: http://scieldas.autophagy.io/rtd/aerende.svg
+    :target: http://aerende.readthedocs.io/en/latest
     :alt: Documentation Status
 
-.. image:: https://travis-ci.org/Autophagy/aerende.svg?branch=master
+.. image:: http://scieldas.autophagy.io/travis/Autophagy/aerende.svg
     :target: https://travis-ci.org/Autophagy/aerende
     :alt: Build Status
 
-.. image:: https://img.shields.io/pypi/v/aerende.svg
+.. image:: http://scieldas.autophagy.io/pypi/version/aerende.svg
    :target: https://pypi.python.org/pypi/aerende/
    :alt: Pypi Version
 
-.. image:: https://img.shields.io/pypi/pyversions/aerende.svg
+.. image:: http://scieldas.autophagy.io/pypi/pyversions/aerende.svg
    :target: https://pypi.python.org/pypi/aerende/
    :alt: Python Version
 
