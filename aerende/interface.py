@@ -198,7 +198,8 @@ class NoteEditor(WidgetWrap):
                 self.title = self.editor.get_edit_text()
                 self.init_tags_mode()
             elif self.mode == 'tags':
-                self.tags = self.editor.get_edit_text()
+                # Enforce lower case tags for consistency
+                self.tags = self.editor.get_edit_text().lower()
                 self.init_text_mode()
 
         elif key == 'esc':
