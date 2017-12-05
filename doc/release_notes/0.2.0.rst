@@ -1,0 +1,13 @@
+=====
+0.2.0
+=====
+
+Release Date :: 15 Forst 226 // 5 Dec 2017
+
+- Some documentation refactoring
+- Some configuration refactoring (``data_path`` is now ``data_options: data_path``)
+- Some general code refactoring and commenting
+- Fixed a configuration file path loading bug
+- Added super increment/decrement of note priority
+- Stripped whitespace from note body text returned from text editor
+- Enforce lower case on note tag input
