@@ -27,7 +27,7 @@
 notes. Written in python, with a curses UI via the `urwid`_ library.
 Documentation is available on `ReadTheDocs`_.
 
-.. image:: doc/_static/screenshot.png
+.. image:: seonu/_static/screenshot.png
     :alt: aerende screenshot
     :align: center
 
@@ -63,10 +63,10 @@ To build the documentation, install the requirements via::
 
   pip install -r requirements.txt
 
-In the `doc` folder, there is a Makefile to build the documentation. For example,
+In the `seonu` folder, there is a Makefile to build the documentation. For example,
 to build the HTML documentation::
 
-  cd doc
+  cd seonu
   make html
 
 The documentation is automatically built and deployed on `ReadTheDocs`_.
