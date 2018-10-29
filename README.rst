@@ -6,8 +6,8 @@
     :target: http://aerende.readthedocs.io/en/latest
     :alt: Documentation Status
 
-.. image:: http://scieldas.autophagy.io/travis/Autophagy/aerende.png
-    :target: https://travis-ci.org/Autophagy/aerende
+.. image:: http://scieldas.autophagy.io/travis/autophagy/aerende.png
+    :target: https://travis-ci.org/autophagy/aerende
     :alt: Build Status
 
 .. image:: http://scieldas.autophagy.io/pypi/version/aerende.png
