@@ -2,11 +2,11 @@
 Ærende
 ======
 
-.. image:: http://scieldas.autophagy.io/rtd/aerende.png
+.. image:: http://scieldas.autophagy.io/rtd/build/aerende.png
     :target: http://aerende.readthedocs.io/en/latest
     :alt: Documentation Status
 
-.. image:: http://scieldas.autophagy.io/travis/autophagy/aerende.png
+.. image:: http://scieldas.autophagy.io/travis/build/autophagy/aerende.png
     :target: https://travis-ci.org/autophagy/aerende
     :alt: Build Status
 
@@ -18,7 +18,7 @@
    :target: https://pypi.python.org/pypi/aerende/
    :alt: Python Version
 
-.. image:: http://scieldas.autophagy.io/licenses/MIT.png
+.. image:: http://scieldas.autophagy.io/misc/licenses/mit.png
    :target: LICENSE
    :alt: MIT License
 
